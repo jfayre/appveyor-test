@@ -28,6 +28,7 @@ deploy_script:
     $releaseName = "v$env:appveyor_build_version"
     $repo = 'jfayre/appveyor-test'
     $tag = $env:appveyor_repo_tag_name
+    $description = Get-Content c:\projects\appveyor-test\changes.md -raw
 
     $headers = @{
       "Authorization" = "token $token"
@@ -38,7 +39,7 @@ deploy_script:
       tag_name = $tag
       target_commitish = "master"
       name = $releaseName
-      body = "Description of the release"
+      body = $description
       draft = $false
       prerelease = $false
     }
