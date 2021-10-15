@@ -23,9 +23,7 @@ after_build:
 
 deploy_script:
  - ps: |
-    if ($env:APPVEYOR_REPO_TAG -ne "true") {
-    Exit-AppVeyorBuild
-    }
+    if ($env:APPVEYOR_REPO_TAG -eq "true") {
     
     $token = $env:gh_token
     $uploadFilePath = "c:\projects\appveyor-test\test.zip"
@@ -67,6 +65,7 @@ deploy_script:
       Write-Host "OK" -ForegroundColor Green
     } catch {
       $host.SetShouldExit(1)
+    }
     }
 
 notifications:
