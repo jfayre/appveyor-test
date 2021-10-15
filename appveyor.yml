@@ -27,6 +27,7 @@ deploy_script:
     $uploadFilePath = "c:\projects\appveyor-test\test.zip"
     $releaseName = "v$env:appveyor_build_version"
     $repo = 'jfayre/appveyor-test'
+    $tag = $env:appveyor_repo_tag_name
 
     $headers = @{
       "Authorization" = "token $token"
@@ -34,7 +35,7 @@ deploy_script:
     }
 
     $body = @{
-      tag_name = $appveyor_repo_tag_name
+      tag_name = $tag
       target_commitish = "master"
       name = $releaseName
       body = "Description of the release"
