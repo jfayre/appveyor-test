@@ -59,7 +59,7 @@ deploy_script:
       Write-Host "OK" -ForegroundColor Green
     } catch {
       $host.SetShouldExit(1)
-}
+    }
 
 notifications:
 - provider: Email
