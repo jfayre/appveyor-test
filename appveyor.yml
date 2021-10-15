@@ -10,16 +10,10 @@ environment:
   encFileKey:
     secure: IS92sMB8DjOsUUuLZRWCEHtM3s4a0TWtWojhyOXsxqk=
 
-before_build:
-- cmd: nuget restore source\tfm.sln
 build:
-  project: source\tfm.sln
+  project: appveyor-test.sln
   verbosity: minimal
-after_build:
-- ps: >-
-    makensis /DVERSION=$env:APPVEYOR_REPO_TAG_NAME /DOUTFILE=tfm-$env:APPVEYOR_REPO_TAG_NAME-setup.exe installer\tfm.nsi
 
-    appveyor PushArtifact installer\tfm-$env:APPVEYOR_REPO_TAG_NAME-setup.EXE
 deploy:
 - provider: FTP
   on:
