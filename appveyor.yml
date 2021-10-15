@@ -24,7 +24,7 @@ after_build:
 deploy_script:
  - ps: |
     if (!$env:appveyor_repo_tag_name) {
-    Exit 0
+    Exit-AppVeyorBuild
     }
     
     $token = $env:gh_token
