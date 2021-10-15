@@ -1,0 +1,39 @@
+version: 0.{build}
+branches:
+  only:
+  - master
+nuget:
+  project_feed: true
+configuration: Debug
+
+environment:
+  encFileKey:
+    secure: IS92sMB8DjOsUUuLZRWCEHtM3s4a0TWtWojhyOXsxqk=
+
+before_build:
+- cmd: nuget restore source\tfm.sln
+build:
+  project: source\tfm.sln
+  verbosity: minimal
+after_build:
+- ps: >-
+    makensis /DVERSION=$env:APPVEYOR_REPO_TAG_NAME /DOUTFILE=tfm-$env:APPVEYOR_REPO_TAG_NAME-setup.exe installer\tfm.nsi
+
+    appveyor PushArtifact installer\tfm-$env:APPVEYOR_REPO_TAG_NAME-setup.EXE
+deploy:
+- provider: FTP
+  on:
+    APPVEYOR_REPO_TAG: true
+  host: voyager.fayretech.com
+  protocol: sftp
+  username: talkingflightmonitor
+  password:
+    secure: gsDOGtodux/gAPPDTybI5w==
+  folder: /tfm-snapshots
+notifications:
+- provider: Email
+  to:
+  - jfayre@gmail.com
+  subject: TFM build
+  on_build_success: true
+  on_build_failure: true
