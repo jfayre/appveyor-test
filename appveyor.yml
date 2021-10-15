@@ -32,7 +32,7 @@ deploy_script:
     }
 
     $body = @{
-      tag_name = $releaseName
+      tag_name = $appveyor_repo_tag_name
       target_commitish = "master"
       name = $releaseName
       body = "Description of the release"
