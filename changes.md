@@ -1,4 +1,4 @@
-# release 1.06
+# release 1.07
 
 * something changes
 * something else changes
