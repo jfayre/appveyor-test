@@ -15,7 +15,7 @@ build:
   verbosity: minimal
 
 artifacts:
-- path: bin
+- path: appveyor-test2\bin
   name: output
 deploy:
 - provider: FTP
