@@ -22,7 +22,7 @@ artifacts:
 deploy_script:
  - ps: |
     $token = $env:gh_token
-    $uploadFilePath = "$env:appveyor_build_folder\test.zip"
+    $uploadFilePath = "appveyor-test2\output.zip"
     $releaseName = "v$env:appveyor_build_version"
     $repo = 'jfayre/appveyor-test'
 
