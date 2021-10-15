@@ -11,7 +11,7 @@ environment:
     secure: IS92sMB8DjOsUUuLZRWCEHtM3s4a0TWtWojhyOXsxqk=
 
 build:
-  project: appveyor-test.sln
+  project: appveyor-test2.sln
   verbosity: minimal
 
 deploy:
