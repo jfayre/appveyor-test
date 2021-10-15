@@ -19,16 +19,20 @@ artifacts:
 - path: test.zip 
   name: test
 after_build:
- - cmd: 7z a test.zip %APPVEYOR_BUILD_FOLDER%\appveyor-test2\bin\*.*
+ - cmd: 7z a test.zip %APPVEYOR_BUILD_FOLDER%\appveyor-test2\bin\debug\*.*
 
 deploy_script:
  - ps: |
+    if (!$env:appveyor_repo_tag_name) {
+    EXIT 0\
+    }
+    
     $token = $env:gh_token
     $uploadFilePath = "c:\projects\appveyor-test\test.zip"
     $releaseName = "v$env:appveyor_build_version"
     $repo = 'jfayre/appveyor-test'
     $tag = $env:appveyor_repo_tag_name
-    $description = Get-Content c:\projects\appveyor-test\changes.md -raw
+    $description = [STRING](Get-Content c:\projects\appveyor-test\changes.md -raw)
 
     $headers = @{
       "Authorization" = "token $token"
